@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOR PRACHI</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            overflow: hidden;
+            font-family: 'Arial Black', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #startBtn {
+            padding: 30px 60px;
+            font-size: 2rem;
+            background: white;
+            color: black;
+            border: 5px solid #333;
+            cursor: pointer;
+            z-index: 10000;
+            font-weight: bold;
+            border-radius: 50px;
+        }
+
+        /* Pure White Fast Blink */
+        .white-strobe {
+            animation: whiteFlash 0.03s infinite;
+        }
+
+        @keyframes whiteFlash {
+            0% { background-color: white; }
+            100% { background-color: #111; } /* Very dark grey for high contrast blink */
+        }
+
+        .win-text {
+            position: absolute;
+            white-space: nowrap;
+            user-select: none;
+            pointer-events: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            z-index: 5;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="startBtn">PRACHI OPENNN THIS</button>
+
+    <script>
+        const btn = document.getElementById('startBtn');
+        
+        btn.addEventListener('click', () => {
+            btn.style.display = 'none';
+            document.body.classList.add('white-strobe');
+
+            // Spawn "I WON!" at an insane rate
+            setInterval(() => {
+                const text = document.createElement('div');
+                text.className = 'win-text';
+                text.innerText = "I WON!";
+                
+                // Random position
+                text.style.top = Math.random() * 100 + "vh";
+                text.style.left = Math.random() * 100 + "vw";
+                
+                // Random size - bigger and smaller mixed
+                text.style.fontSize = (Math.random() * 100 + 10) + "px";
+                
+                // High contrast text so it's visible during the blink
+                text.style.color = Math.random() > 0.5 ? '#000' : '#444';
+                
+                // Random rotation
+                text.style.transform = `rotate(${Math.random() * 360}deg)`;
+
+                document.body.appendChild(text);
+
+                // Cleanup to keep the browser running
+                if (document.body.children.length > 400) {
+                    document.body.removeChild(document.body.children[1]); 
+                }
+            }, 15); // Faster loop for more text
+        });
+    </script>
+</body>
+</html>
